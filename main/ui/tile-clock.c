@@ -15,6 +15,7 @@ static tile_t clock_tile;
 static image_t *clock_digits;
 rtc_datetime_t datetime;
 int hours=12, mins=34;
+widget_date_t date_widget;
 
 int _tile_clock_draw(tile_t *p_tile)
 {
@@ -99,6 +100,8 @@ void clock_update(void *parameter)
     twatch_rtc_get_date_time(&datetime);
     hours = datetime.hour;
     mins = datetime.minute;
+    snprintf(&date_widget.psz_label_date, 16, "  %02d/%02d/%04d", datetime.day, datetime.month, datetime.year);
+    widget_label_set_text(&date_widget.date_lbl, &date_widget.psz_label_date);
     vTaskDelay(300/portTICK_PERIOD_MS);
   }
 }
@@ -111,6 +114,12 @@ tile_t *tile_clock_init(void)
 
   /* Initialize our tile. */
   tile_init(&clock_tile, NULL);
+
+  /* Add date label */ 
+  widget_label_init(&date_widget, &clock_tile, 15, 100, 107, 22, &date_widget.psz_label_date);
+  widget_label_set_fontsize(&date_widget, LABEL_FONT_SMALL);
+  widget_set_bg_color(&date_widget, RGB(0x00,0x66,0x00));
+
 
   /* Set tile drawing function. */
   tile_set_drawfunc(&clock_tile, _tile_clock_draw);
