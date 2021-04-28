@@ -79,11 +79,11 @@ void app_main(void)
   {
     printf("[pmu] PMU is not detected\r\n");
   }
-
+  /* init rtc before turning display ON */
+  twatch_rtc_init();
   twatch_vibrate_init();
   twatch_pmu_init();
   twatch_screen_init();
-  twatch_rtc_init();
   /*
   datetime.year = 2021;
   datetime.month=4;
