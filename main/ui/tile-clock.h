@@ -14,4 +14,11 @@ typedef struct {
   
 } widget_date_t;
 
+typedef struct {
+  widget_label_t secs_lbl;
+  /* label secs buffer. */
+  char psz_label_secs[11];
+  
+} widget_secs_t;
+
 #endif /* __INC_HACKWATCH_CLOCK_H */

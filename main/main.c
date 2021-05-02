@@ -64,8 +64,8 @@ void main_ui(void *parameter)
 void app_main(void)
 {
   //rtc_datetime_t datetime;
-  esp_err_t ret;
-
+  //esp_err_t ret;
+  twatch_touch_set_inverted(true);
   esp_log_level_set("*", ESP_LOG_INFO);
 
   ui_init();
