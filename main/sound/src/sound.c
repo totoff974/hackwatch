@@ -6,7 +6,7 @@
 #include "esp_system.h"
 #include "esp_log.h"
 
-#include "sound.h"
+#include "../inc/sound.h"
 
 int sound_init(sound_system_t *p_sound_system, int sample_rate)
 {

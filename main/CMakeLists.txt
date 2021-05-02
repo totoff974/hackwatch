@@ -1,7 +1,4 @@
 # Edit following two lines to set component requirements (see docs)
-set(COMPONENT_REQUIRES twatch-lib)
-set(COMPONENT_PRIV_REQUIRES )
 
-set(COMPONENT_SRCS "main.c wifi/wifi.c wifi/wifi_aplist.c wifi/wifiscan.c wifi/dissect.c ui/tile-scanner.c ui/tile-apinfo.c ui/tile-clock.c ui/tile-settings.c")
-
-register_component()
+FILE(GLOB_RECURSE app_sources ${CMAKE_SOURCE_DIR}/main/*.*)
+idf_component_register(SRCS ${app_sources})
