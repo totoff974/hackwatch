@@ -110,6 +110,28 @@ void clock_update(void *parameter)
 }
 
 
+int clock_tile_event_handler(tile_t *p_tile, tile_event_t event, int x, int y, int velocity)
+{
+  switch (event)
+  {
+    case TE_ENTER:
+      {
+        /* Stop scanner. */
+        wifi_set_mode(WIFI_OFF);
+      }
+      break;
+
+    case TE_EXIT:
+      break;
+      
+    case TE_USERBTN:
+      break;
+  }
+
+  /* Success. */
+  return TE_PROCESSED;
+}
+
 tile_t *tile_clock_init(void)
 {
   /* Load digits into memory. */
@@ -117,6 +139,7 @@ tile_t *tile_clock_init(void)
 
   /* Initialize our tile. */
   tile_init(&clock_tile, NULL);
+  tile_set_event_handler(&clock_tile, clock_tile_event_handler);
 
   /* Add date label */ 
   widget_label_init(&date_widget, &clock_tile, 15, 100, 107, 22, &date_widget.psz_label_date);

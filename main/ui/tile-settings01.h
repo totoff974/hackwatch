@@ -1,5 +1,5 @@
-#ifndef __INC_HACKWATCH_SETTINGS_H
-#define __INC_HACKWATCH_SETTINGS_H
+#ifndef __INC_HACKWATCH_SETTINGS01_H
+#define __INC_HACKWATCH_SETTINGS01_H
 
 #include "twatch.h"
 #include "ui/ui.h"
@@ -31,6 +31,6 @@ void widget_value_select_init(
 );
 int widget_value_select_get_value(widget_value_select_t *p_value_select);
 
-tile_t *tile_settings_init(void);
+tile_t *tile_settings01_init(void);
 
-#endif /* __INC_HACKWATCH_SETTINGS_H */
+#endif /* __INC_HACKWATCH_SETTINGS01_H */

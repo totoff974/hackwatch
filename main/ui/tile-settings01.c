@@ -1,11 +1,12 @@
-#include "tile-settings.h"
+#include "tile-settings01.h"
 
-static tile_t settings_tile;
+#define TAG "[tile::settings::settings01]"
+
+static tile_t settings01_tile;
 static widget_value_select_t hours_select;
 static widget_value_select_t mins_select;
 static rtc_datetime_t datetime;
 static widget_label_t lbl_title;
-static widget_button_t btn_orientation;
 static widget_button_t btn_save;
 
 /**
@@ -102,46 +103,28 @@ void settings_save_onclick(widget_t *p_widget)
   twatch_rtc_set_date_time(&datetime);
 }
 
-void settings_invert_onclick(widget_t *p_widget)
-{
-  if (twatch_screen_is_inverted())
-  {
-    /* Disable inverted screen. */
-    twatch_screen_set_inverted(false);
-    twatch_touch_set_inverted(false);
-  }
-  else
-  {
-    /* Enable inverted screen. */
-    twatch_screen_set_inverted(true);
-    twatch_touch_set_inverted(true);
-  }
-}
-
-tile_t *tile_settings_init(void)
+tile_t *tile_settings01_init(void)
 {
   /* Get date and time. */
   twatch_rtc_get_date_time(&datetime);
 
   /* Initialize our tile. */
-  tile_init(&settings_tile, NULL);
+  tile_init(&settings01_tile, NULL);
 
   /* Initialize our title label. */
-  widget_label_init(&lbl_title, &settings_tile, 10, 5, 230, 45, "Settings");
+  widget_label_init(&lbl_title, &settings01_tile, 10, 5, 230, 45, "Settings");
+  widget_set_bg_color(&lbl_title, RGB(0x00,0x66,0x00));
 
   /* Initialize our hours selection widget. */
-  widget_value_select_init(&hours_select, &settings_tile, 10, 55, 60, 80, 0, 23, datetime.hour);
+  widget_value_select_init(&hours_select, &settings01_tile, 10, 55, 60, 80, 0, 23, datetime.hour);
 
   /* Initialize our hours selection widget. */
-  widget_value_select_init(&mins_select, &settings_tile, 80, 55, 60, 80, 0, 59, datetime.minute);
+  widget_value_select_init(&mins_select, &settings01_tile, 80, 55, 60, 80, 0, 59, datetime.minute);
 
   /* Initialize our buttons. */
-  widget_button_init(&btn_save, &settings_tile, 15, 140, 210, 45, "Save settings");
+  widget_button_init(&btn_save, &settings01_tile, 15, 140, 210, 45, "Save settings");
   widget_button_set_handler(&btn_save, settings_save_onclick);
-  
-  widget_button_init(&btn_orientation, &settings_tile, 15, 190, 210, 45, "Rotate screen");
-  widget_button_set_handler(&btn_orientation, settings_invert_onclick);
 
   /* Return our tile. */
-  return &settings_tile;
+  return &settings01_tile;
 }
